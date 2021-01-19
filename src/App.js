@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import SearchPokemon from './Components/SearchPokemon'
+import PokemonCard from './Components/PokemonCard'
+import { title } from './Utils/Constants'
+
 
 function App() {
+
+  const [searchPokemon, setSearchPokemon] = useState("")
+  const [currentPokemon, setCurrentPokemon] = useState(null)
+  const [pokemonLoading, setPokemonLoading] = useState(false)
+
+  console.log({ searchPokemon, currentPokemon })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="OuterContainer">
+      <div className="Banner">{title}</div>
+      <SearchPokemon searchValue={searchPokemon} onChange={setSearchPokemon} onResult={setCurrentPokemon} />
+      {currentPokemon &&
+        <PokemonCard currentValue={currentPokemon}></PokemonCard>
+      }
+    </div >
   );
 }
 

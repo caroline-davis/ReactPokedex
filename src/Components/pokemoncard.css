@@ -1,0 +1,11 @@
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex space-around;
+  max-width: 50%;
+}
+
+.card-container img {
+  width: 20%;
+  height: 20%;
+}
