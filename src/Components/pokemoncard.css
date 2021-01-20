@@ -3,9 +3,31 @@
   flex-direction: row;
   justify-content: flex space-around;
   max-width: 50%;
+  min-width: 200px;
+  border-width: 2px;
+  border-color: #000;
+  border-style: solid;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
 .card-container img {
-  width: 20%;
-  height: 20%;
+  min-width: 100px;
+  background-color: #ff0000;
+}
+
+.text-container {
+  text-transform: capitalize;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.text-container h1 {
+  font-family: "Pokemon";
+  letter-spacing: 3px;
+  font-size: 20px;
+  color: #2a3aa3;
 }

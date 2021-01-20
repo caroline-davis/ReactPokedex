@@ -10,14 +10,13 @@ export default ({ searchValue, onChange, onResult }) => {
     }
 
     return (
-        <>
+        <div className="search-container">
             <input type="text"
-                placeholder="Type in a pokemon"
-                className="search-for-pokemon"
+                placeholder="Find a pokemon"
                 value={searchValue}
                 onChange={(e) => onChange(e.target.value)}>
             </input>
             <button onClick={() => callSearchPokemon()}>Search</button>
-        </>
+        </div>
     )
 }
