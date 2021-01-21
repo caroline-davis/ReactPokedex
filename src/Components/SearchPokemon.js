@@ -18,7 +18,6 @@ export default ({ searchValue, onChange, onResult, onLoading, onError }) => {
                 onLoading(false)
                 onResult(null)
                 onError(true)
-                console.log('there was an error')
             }
         }
     }

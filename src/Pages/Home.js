@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './App.css';
-import SearchPokemon from './Components/SearchPokemon'
-import PokemonCard from './Components/PokemonCard'
-import { title, errorMsg } from './Utils/Constants'
-import pokeball from './Assets/pokeball.png'
+import { Link } from "react-router-dom";
+import './Home.css';
+import SearchPokemon from '../Components/SearchPokemon'
+import PokemonCard from '../Components/PokemonCard'
+import { title, errorMsg } from '../Utils/Constants'
+import pokeball from '../Assets/pokeball.png'
 
-function App() {
+function Home() {
 
   const [searchPokemon, setSearchPokemon] = useState("")
   const [currentPokemon, setCurrentPokemon] = useState(null)
@@ -23,10 +24,12 @@ function App() {
       {pokemonLoading && <img className="spinner" src={pokeball} alt="loading"></img>}
       {loadingError && <div className="error-msg">{errorMsg}</div>}
       {currentPokemon && !pokemonLoading && !loadingError &&
-        <PokemonCard currentValue={currentPokemon}></PokemonCard>
+        <Link className="link" to={`/detail/${searchPokemon}`}>
+          <PokemonCard currentValue={currentPokemon} />
+        </Link>
       }
     </div >
   );
 }
 
-export default App;
+export default Home;
