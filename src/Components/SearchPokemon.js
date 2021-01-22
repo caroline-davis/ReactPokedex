@@ -1,7 +1,7 @@
 import React from 'react';
 import './searchpokemon.css'
 import { getPokemonApi } from '../Api/index'
-import { searchPlaceholder } from '../Utils/Constants'
+import { searchPlaceholder, BASIC_URL } from '../Utils/Constants'
 
 export default ({ searchValue, onChange, onResult, onLoading, onError }) => {
 
@@ -10,7 +10,7 @@ export default ({ searchValue, onChange, onResult, onLoading, onError }) => {
             onLoading(true)
             onError(false)
             try {
-                const result = await getPokemonApi(searchValue.toLowerCase())
+                const result = await getPokemonApi(searchValue.toLowerCase(), BASIC_URL)
                 onResult(result)
                 onLoading(false)
                 onError(false)

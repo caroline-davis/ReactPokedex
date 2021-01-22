@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import './Home.css';
+import './home.css';
 import SearchPokemon from '../Components/SearchPokemon'
 import PokemonCard from '../Components/PokemonCard'
 import { title, errorMsg } from '../Utils/Constants'

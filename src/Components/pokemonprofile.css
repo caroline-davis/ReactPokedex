@@ -1,0 +1,56 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  color: black;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+  background-color: white;
+  padding: 10px;
+  max-width: 300px;
+}
+
+.profile-container img {
+  background-color: red;
+  border-radius: 50px;
+  border-color: black;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.pokemon-name {
+  font-family: "Pokemon";
+  letter-spacing: 3px;
+  font-size: 30px;
+  color: #2a3aa3;
+}
+
+.pokemon-attributes div {
+  padding: 10px;
+  color: #2a3aa3;
+}
+
+.pokemon-attributes b {
+  color: red;
+}
+
+.pokemon-health {
+  display: flex;
+}
+
+.back-button {
+  margin: 10px;
+  max-width: 10%;
+  min-width: 65px;
+  border-radius: 25px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 5px;
+}

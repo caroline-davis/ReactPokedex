@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getPokemonApi } from '../Api/index'
 import { useParams } from "react-router-dom";
 import pokeball from '../Assets/pokeball.png'
-import { errorMsg } from '../Utils/Constants'
+import PokemonProfile from '../Components/PokemonProfile'
+import { getPokemonApi } from '../Api/index'
+import { errorMsg, BASIC_URL } from '../Utils/Constants'
+import './detail.css'
 
 
 function Detail() {
@@ -13,11 +15,25 @@ function Detail() {
     const [loading, setLoading] = useState(true)
     const [loadingError, setLoadingError] = useState(false)
 
+    function wrangleData(data) {
+        return {
+            "name": data.name,
+            "type": data.types.map(type => type.type.name).join(', '),
+            "image": data.sprites.front_default,
+            "height": data.height,
+            "weight": data.weight,
+            "abilities": data.abilities.map(ability => ability.ability.name).join(', '),
+            "items": data.held_items.map(heldItem => heldItem.item.name).join(', ')
+        }
+    }
+
     useEffect(() => {
         async function pokemonInfo() {
             setLoading(true)
             try {
-                setPokemonDetails(await getPokemonApi(pokemon))
+                const result = await getPokemonApi(pokemon.toLowerCase(), BASIC_URL)
+                const data = wrangleData(result)
+                setPokemonDetails(data)
                 setLoading(false)
                 setLoadingError(false)
             } catch {
@@ -29,22 +45,14 @@ function Detail() {
     }, [])
 
 
-    if (!loading) {
-        console.log(pokemonDetails.sprites.front_default)
-        console.log(pokemonDetails.name)
-        console.log(pokemonDetails.abilities.map(ability => ability.ability.name))
-        console.log(pokemonDetails)
-        console.log(pokemonDetails.held_items.map(heldItem => heldItem.item.name))
-    }
-
     return (
-        <>
+        <div className="detail-container">
             {loading && <img className="spinner" src={pokeball} alt="loading"></img>}
             {loadingError && <div className="error-msg">{errorMsg}</div>}
-        </>
+            {!loading && pokemonDetails &&
+                <div><PokemonProfile data={pokemonDetails} /></div>}
+        </div>
     )
-
-
 }
 
 export default Detail;

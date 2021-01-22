@@ -1,4 +1,7 @@
-export const API_BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
+export const API_BASE_URL = 'https://pokeapi.co/api/v2/'
+
+export const BASIC_URL = 'pokemon/'
+export const SPECIES_URL = 'pokemon-species/'
 
 export const title = 'POKEDEX'
 
