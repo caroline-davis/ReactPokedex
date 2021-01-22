@@ -1,7 +1,14 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import './pokemonprofile.css'
 
 export default ({ data }) => {
+
+    let history = useHistory()
+
+    function handleClick() {
+        history.push('/')
+    }
 
     return (
         <div class="profile-container">
@@ -14,7 +21,9 @@ export default ({ data }) => {
                 <div><b>Abilities:</b> {data.abilities}</div>
                 <div><b>Items:</b> {data.items}</div>
             </div>
-            <button class="back-button">back</button>
+            <button class="back-button"
+                onClick={handleClick}>back
+            </button>
         </div>
     )
 }
