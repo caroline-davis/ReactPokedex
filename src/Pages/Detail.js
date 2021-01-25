@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import pokeball from '../Assets/pokeball.png'
 import PokemonProfile from '../Components/PokemonProfile'
 import { getPokemonApi } from '../Api/index'
-import { errorMsg, BASIC_URL } from '../Utils/Constants'
+import { errorMsg, BASIC_URL, EVOLUTION_URL, SPECIES_URL } from '../Utils/Constants'
 import './detail.css'
 
 
@@ -15,15 +15,16 @@ function Detail() {
     const [loading, setLoading] = useState(true)
     const [loadingError, setLoadingError] = useState(false)
 
-    function wrangleData(data) {
+    function wrangleData(basicData, evolutionData) {
         return {
-            "name": data.name,
-            "type": data.types.map(type => type.type.name).join(', '),
-            "image": data.sprites.front_default,
-            "height": data.height,
-            "weight": data.weight,
-            "abilities": data.abilities.map(ability => ability.ability.name).join(', '),
-            "items": data.held_items.map(heldItem => heldItem.item.name).join(', ')
+            "name": basicData.name,
+            "type": basicData.types.map(type => type.type.name).join(', '),
+            "image": basicData.sprites.front_default,
+            "height": basicData.height,
+            "weight": basicData.weight,
+            "abilities": basicData.abilities.map(ability => ability.ability.name).join(', '),
+            "items": basicData.held_items.map(heldItem => heldItem.item.name).join(', '),
+            "evolution": evolutionData.chain.evolves_to[0]?.evolves_to.map(evolve => evolve.species.name).join(', ')
         }
     }
 
@@ -31,8 +32,11 @@ function Detail() {
         async function pokemonInfo() {
             setLoading(true)
             try {
-                const result = await getPokemonApi(pokemon.toLowerCase(), BASIC_URL)
-                const data = wrangleData(result)
+                const basicInfo = await getPokemonApi(pokemon.toLowerCase(), BASIC_URL)
+                const speciesInfo = await getPokemonApi(pokemon.toLowerCase(), SPECIES_URL)
+                const evolutionId = speciesInfo.evolution_chain.url.split('/')
+                const evolutionInfo = await getPokemonApi(evolutionId[evolutionId.length - 2], EVOLUTION_URL)
+                const data = wrangleData(basicInfo, evolutionInfo)
                 setPokemonDetails(data)
                 setLoading(false)
                 setLoadingError(false)

@@ -1,3 +1,4 @@
+import { findAllByPlaceholderText } from '@testing-library/react'
 import { API_BASE_URL } from '../Utils/Constants'
 
 export const getPokemonApi = async (value, endPoint) => {
